@@ -7,6 +7,9 @@ import javax.xml.namespace.QName;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Code snippet to answer the question https://stackoverflow.com/questions/61205132/gson-fromjson-is-not-assigning-values-to-the-java-fields
+ */
 public class GsonTest {
     public static void main(String[] args) {
         Gson gson = new GsonBuilder().create();
@@ -17,17 +20,22 @@ public class GsonTest {
     }
 }
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "AttributedURI", propOrder = {
+        "value"
+})
 class AttributedURI {
+    @XmlValue
+    @XmlSchemaType(name = "anyURI")
     protected String value;
+    @XmlAnyAttribute
     private Map<QName, String> otherAttributes = new HashMap<QName, String>();
 
     /**
      * Gets the value of the value property.
      *
-     * @return
-     *     possible object is
-     *     {@link String }
-     *
+     * @return possible object is
+     * {@link String }
      */
     public String getValue() {
         return value;
@@ -36,10 +44,8 @@ class AttributedURI {
     /**
      * Sets the value of the value property.
      *
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setValue(String value) {
         this.value = value;
@@ -51,13 +57,11 @@ class AttributedURI {
      * <p>
      * the map is keyed by the name of the attribute and
      * the value is the string value of the attribute.
-     *
+     * <p>
      * the map returned by this method is live, and you can add new attribute
      * by updating the map directly. Because of this design, there's no setter.
      *
-     *
-     * @return
-     *     always non-null
+     * @return always non-null
      */
     public Map<QName, String> getOtherAttributes() {
         return otherAttributes;
@@ -76,7 +80,7 @@ class OuterClass {
     @SerializedName("MessageID")
     private AttributedURI messageID;
 
-    public AttributedURI getMessageID(){
+    public AttributedURI getMessageID() {
         return messageID;
     }
 

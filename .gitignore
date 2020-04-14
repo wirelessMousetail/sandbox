@@ -1,2 +1,7 @@
 # Project exclude paths
-/target/
+.idea
+*.iml
+/**/target
+.DS_Store
+.vscode
+
